@@ -4,15 +4,15 @@
 
 /* ── CONFIGURACIÓN GENERAL ── */
 const TOTAL = 12;
-let current   = 0;
+let current = 0;
 let animating = false;
 
 const progressBar = document.getElementById('progressBar');
-const navCounter  = document.getElementById('navCounter');
-const btnPrev     = document.getElementById('btnPrev');
-const btnNext     = document.getElementById('btnNext');
-const navSteps    = document.getElementById('navSteps');
-const navButtons  = document.querySelector('.nav-buttons');
+const navCounter = document.getElementById('navCounter');
+const btnPrev = document.getElementById('btnPrev');
+const btnNext = document.getElementById('btnNext');
+const navSteps = document.getElementById('navSteps');
+const navButtons = document.querySelector('.nav-buttons');
 
 /* ── NAVEGACIÓN ENTRE SLIDES ── */
 function getSlide(i) {
@@ -27,7 +27,7 @@ async function goTo(target) {
   await injectSlide(target);
 
   const currSlide = getSlide(current);
-  const nextS     = getSlide(target);
+  const nextS = getSlide(target);
 
   // Pre-cargar la primera imagen del slide destino antes de la transición
   await preloadFirstImage(nextS);
@@ -55,7 +55,7 @@ async function goTo(target) {
 }
 
 function nextSlide() { goTo(current + 1); }
-function prevSlide()  { goTo(current - 1); }
+function prevSlide() { goTo(current - 1); }
 
 /* ── ACTUALIZAR INTERFAZ (CONTADOR, WIZARD, BOTONES) ── */
 function updateUI() {
@@ -77,11 +77,11 @@ function updateUI() {
 
   // Ocultar botones Anterior/Siguiente en Portada, Introducción y Contenido
   const hideNav = current <= 2;
-  navButtons.style.opacity       = hideNav ? '0' : '1';
+  navButtons.style.opacity = hideNav ? '0' : '1';
   navButtons.style.pointerEvents = hideNav ? 'none' : 'all';
 
   // Botón anterior
-  btnPrev.style.opacity       = current === 0 ? '0.3' : '1';
+  btnPrev.style.opacity = current === 0 ? '0.3' : '1';
   btnPrev.style.pointerEvents = current === 0 ? 'none' : 'all';
 
   // Botón siguiente
@@ -97,10 +97,10 @@ function updateUI() {
   navSteps.innerHTML = '';
   for (let i = 0; i < TOTAL; i++) {
     const label = i === 0 ? 'Portada' : i === 1 ? 'Introducción' : i === 2 ? 'Contenido' : i === TOTAL - 1 ? 'Glosario' : `Paso ${i - 2}`;
-    const step  = document.createElement('div');
+    const step = document.createElement('div');
     step.className = 'wizard-step' + (i === current ? ' active' : i < current ? ' done' : '');
-    step.title     = label;
-    step.onclick   = () => goTo(i);
+    step.title = label;
+    step.onclick = () => goTo(i);
 
     const circle = document.createElement('div');
     circle.className = 'wizard-circle';
@@ -132,7 +132,7 @@ function updateUI() {
 /* ── SOPORTE DE TECLADO ── */
 document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); nextSlide(); }
-  if (e.key === 'ArrowLeft')                   { e.preventDefault(); prevSlide(); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); prevSlide(); }
 });
 
 /* ═══════════════════════════════════════════
@@ -144,71 +144,75 @@ const HOTSPOTS = {
 
   /* PASO 1 · Instalación */
   'img-2': [
-    { dots: [{x:48, y:56}], label: 'Toca el ícono de Play Store en tu pantalla de inicio' },
-    { dots: [{x:55, y:88}], label: 'Toca la lupa de búsqueda en la parte superior de Play Store' },
-    { dots: [{x:55, y:6}],  label: 'Escribe "AliExpress" en la barra de búsqueda' },
-    { dots: [{x:93, y:89}], label: 'Presiona "Buscar" en tu teclado para ver los resultados' },
-    { dots: [{x:50, y:42}], label: 'Ubica AliExpress de Alibaba Mobile en los resultados' },
-    { dots: [{x:77, y:39}], label: 'Toca la app y presiona el botón "Instalar"' },
-    { dots: [{x:88, y:39}], label: 'Cuando termine la instalación, toca "Abrir"' },
+    { dots: [{ x: 48, y: 56 }], label: 'Toca el ícono de Play Store en tu pantalla de inicio' },
+    { dots: [{ x: 55, y: 88 }], label: 'Toca la lupa de búsqueda en la parte superior de Play Store' },
+    { dots: [{ x: 55, y: 6 }], label: 'Escribe "AliExpress" en la barra de búsqueda' },
+    { dots: [{ x: 93, y: 89 }], label: 'Presiona "Buscar" en tu teclado para ver los resultados' },
+    { dots: [{ x: 50, y: 42 }], label: 'Ubica AliExpress de Alibaba Mobile en los resultados' },
+    { dots: [{ x: 77, y: 39 }], label: 'Toca la app y presiona el botón "Instalar"' },
+    { dots: [{ x: 88, y: 39 }], label: 'Cuando termine la instalación, toca "Abrir"' },
   ],
 
   /* PASO 2 · Registro */
   'img-3': [
-    { dots: [{x:50, y:75}], label: 'Toca "Registrarse" para crear tu cuenta' },
-    { dots: [{x:50, y:38}], label: 'Ingresa tu correo electronico aqui' },
-    { dots: [{x:50, y:42}], label: 'Ingresa el codigo de verificacion recibido' },
-    { dots: [{x:50, y:38}], label: 'Completa tu direccion de entrega aqui' },
+    { dots: [{ x: 26, y: 26 }], label: 'Toca "Registrarse" para crear tu cuenta' },
+    { dots: [{ x: 82, y: 89 }], label: 'Ingresa tu correo electronico aqui' },
+    { dots: [{ x: 89, y: 95 }], label: 'Ingresa el codigo de verificacion recibido' },
+    { dots: [{ x: 50, y: 56 }], label: 'Completa tu direccion de entrega aqui' },
   ],
 
   /* PASO 3 · Interfaz principal */
   'img-4': [
-    { dots: [{x:50, y:10}], label: 'Esta es la barra de busqueda principal' },
-    { dots: [{x:50, y:32}], label: 'Aqui aparecen las ofertas y cupones activos' },
-    { dots: [{x:20,y:93},{x:40,y:93},{x:60,y:93},{x:80,y:93}],
-      label: 'Menu inferior: Inicio · Categorias · Carrito · Mi cuenta' },
-    { dots: [{x:18, y:28}], label: 'Sello Choice: envio gratis y compra protegida' },
+    { dots: [{ x: 50, y: 12 }], label: 'Esta es la barra de busqueda principal' },
+    { dots: [{ x: 50, y: 72 }], label: 'Aqui aparecen las ofertas y cupones activos' },
+    {
+      dots: [{ x: 10, y: 96 }, { x: 30, y: 96 }, { x: 70, y: 96 }, { x: 88, y: 96 }],
+      label: 'Menu inferior: Inicio · Categorias · Carrito · Mi cuenta'
+    },
+    { dots: [{ x: 40, y: 18 }], label: 'Sello Choice: envio gratis y compra protegida' },
   ],
 
   /* PASO 4 · Búsqueda */
   'img-5': [
-    { dots: [{x:50, y:10}], label: 'Toca aqui para comenzar tu busqueda' },
-    { dots: [{x:50, y:8}],  label: 'Escribe el nombre del producto y presiona Buscar' },
-    { dots: [{x:22, y:18}], label: 'Toca "Choice" para ver solo productos confiables' },
-    { dots: [{x:50, y:15}], label: 'Toca "Filtros" para afinar los resultados' },
+    { dots: [{ x: 50, y: 12 }], label: 'Toca aqui para comenzar tu busqueda' },
+    { dots: [{ x: 50, y: 7 }], label: 'Escribe el nombre del producto y presiona Buscar' },
+    { dots: [{ x: 35, y: 20 }], label: 'Toca "Choice" para ver solo productos confiables' },
+    { dots: [{ x: 65, y: 70 }], label: 'Toca "Filtros" para afinar los resultados' },
   ],
 
   /* PASO 5 · Selección del producto */
   'img-6': [
-    { dots: [{x:32, y:22},{x:65, y:22}], label: 'Revisa el precio y el tiempo estimado de envio' },
-    { dots: [{x:30, y:58},{x:55, y:58}], label: 'Toca la variante que deseas (color, talla...)' },
-    { dots: [{x:50, y:88}], label: 'Toca "Agregar al carrito" o "Comprar ahora"' },
-    { dots: [{x:50, y:35}], label: 'Verifica que tu direccion de entrega sea correcta' },
+    { dots: [{ x: 20, y: 45 }, { x: 50, y: 68 }], label: 'Revisa el precio y el tiempo estimado de envio' },
+    { dots: [{ x: 40, y: 50 }], label: 'Toca la variante que deseas (color, talla...)' },
+    { dots: [{ x: 25, y: 96 }, { x: 75, y: 96 }], label: 'Toca "Agregar al carrito" o "Comprar ahora"' },
+    { dots: [{ x: 50, y: 20 }], label: 'Verifica que tu direccion de entrega sea correcta' },
   ],
 
   /* PASO 6 · Pago */
   'img-7': [
-    { dots: [{x:50, y:45}], label: 'Toca aqui para seleccionar el metodo de pago' },
-    { dots: [{x:50,y:28},{x:30,y:48},{x:70,y:48}],
-      label: 'Ingresa numero de tarjeta, fecha y CVV' },
-    { dots: [{x:50, y:62}], label: 'Verifica el total a pagar antes de confirmar' },
-    { dots: [{x:50, y:85}], label: 'Toca "Pagar ahora" para confirmar tu compra' },
+    { dots: [{ x: 45, y: 33 }], label: 'Toca aqui para seleccionar el metodo de pago' },
+    {
+      dots: [{ x: 50, y: 34 }, { x: 50, y: 52 }, { x: 50, y: 61 }],
+      label: 'Ingresa numero de tarjeta, fecha y CVV'
+    },
+    { dots: [{ x: 50, y: 55 }], label: 'Verifica el total a pagar antes de confirmar' },
+    { dots: [{ x: 75, y: 95 }], label: 'Toca "Pagar ahora" para confirmar tu compra' },
   ],
 
   /* PASO 7 · Seguimiento */
   'img-8': [
-    { dots: [{x:50, y:35}], label: 'Aqui aparece el estado actual de tu pedido' },
-    { dots: [{x:50, y:50}], label: 'Toca "Rastrear" para ver la ruta del paquete' },
-    { dots: [{x:85, y:8}],  label: 'Activa las notificaciones para alertas de envio' },
-    { dots: [{x:50, y:85}], label: 'Toca aqui para confirmar que recibiste el paquete' },
+    { dots: [{ x: 50, y: 22 }], label: 'Aqui aparece el estado actual de tu pedido' },
+    { dots: [{ x: 10, y: 50 }], label: 'Toca "Rastrear" para ver la ruta del paquete' },
+    { dots: [{ x: 85, y: 91 }], label: 'Activa las notificaciones para alertas de envio' },
+    { dots: [{ x: 50, y: 30 }], label: 'Toca aqui para confirmar que recibiste el paquete' },
   ],
 
   /* PASO 8 · Problemas y soporte */
   'img-9': [
-    { dots: [{x:50, y:40}], label: 'Mensaje de pago rechazado por el banco' },
-    { dots: [{x:50, y:68}], label: 'Desde aqui puedes abrir una disputa por retraso' },
-    { dots: [{x:50, y:88}], label: 'Escribe aqui para chatear con el asistente EVA' },
-    { dots: [{x:50, y:75}], label: 'Toca "Abrir disputa" para proteger tu compra' },
+    { dots: [{ x: 35, y: 11 }], label: 'Mensaje de pago rechazado por el banco' },
+    { dots: [{ x: 50, y: 43 }], label: 'Desde aqui puedes abrir una disputa por retraso' },
+    { dots: [{ x: 60, y: 94 }], label: 'Escribe aqui para chatear con el asistente EVA' },
+    { dots: [{ x: 68, y: 52 }], label: 'Toca "Abrir disputa" para proteger tu compra' },
   ],
 };
 
@@ -227,8 +231,8 @@ function renderHotspots(frameEl, stepData) {
     const el = document.createElement('div');
     el.className = 'hotspot';
     el.style.left = x + '%';
-    el.style.top  = y + '%';
-    el.innerHTML  = '<div class="hotspot-ring"></div><div class="hotspot-dot"></div>';
+    el.style.top = y + '%';
+    el.innerHTML = '<div class="hotspot-ring"></div><div class="hotspot-dot"></div>';
     frameEl.appendChild(el);
   });
 }
@@ -279,7 +283,7 @@ async function startTour() {
     const step = this._currentStep;
     // Mostrar botones de nav para los pasos que los referencian
     if (step === 4 || step === 5) {
-      navButtons.style.opacity       = '1';
+      navButtons.style.opacity = '1';
       navButtons.style.pointerEvents = 'all';
     }
     // Navegar al Paso 1 para mostrar el teléfono y la lista
@@ -352,7 +356,7 @@ async function startTour() {
 updateUI();
 
 // Pre-cargar slide 1 inmediatamente (es el siguiente al que irá el usuario)
-injectSlide(1).catch(() => {});
+injectSlide(1).catch(() => { });
 
 // Lanzar el tour automáticamente en la primera visita
 if (!localStorage.getItem('manual-tour-done')) {
