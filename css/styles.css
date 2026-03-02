@@ -47,6 +47,7 @@ body {
   transform: translateY(40px) scale(0.98);
   transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
     transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
 }
 
 .slide.active {
@@ -93,6 +94,7 @@ nav {
 .nav-logo i {
   background: linear-gradient(135deg, var(--primary), var(--accent));
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   font-size: 22px;
 }
@@ -636,7 +638,7 @@ h3 {
   50%       { box-shadow: 0 0 0 6px rgba(255, 71, 71, 0.15), 0 0 28px rgba(255, 71, 71, 0.8); }
 }
 
-.timeline-item.active-step .timeline-marker {
+.timeline-item.pulse-once .timeline-marker {
   animation: marker-pulse 1.8s ease-in-out 3;
 }
 

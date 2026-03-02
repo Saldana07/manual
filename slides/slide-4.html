@@ -15,15 +15,16 @@
                 es tu primera vez, elige Registrarse.</p>
             </div>
           </div>
-          <div class="timeline-item" onclick="updateModuleSlide('img/Bienvenidad.jpeg', this, 'img-3')">
+          <div class="timeline-item" onclick="updateModuleSlide('img/inicio-Sesion.jpeg', this, 'img-3')">
             <div class="timeline-marker">2</div>
             <div class="timeline-content">
               <h3>Ingresar Correo o Celular</h3>
-              <p>Regístrate con tu <strong>correo electrónico</strong>, número de celular, o usando directamente tu
-                cuenta de Google.</p>
+              <p>Puedes iniciar sesión colocando tu <strong>correo electrónico</strong> y contraseña, o dando clic en
+                alguna de las opciones de redes sociales: <strong>Facebook</strong> y <strong>X</strong>, o usando
+                tu cuenta de <strong>Google</strong> o <strong>Apple</strong>.</p>
             </div>
           </div>
-          <div class="timeline-item" onclick="updateModuleSlide('img/Bienvenidad.jpeg', this, 'img-3')">
+          <div class="timeline-item" onclick="showStepVideo(this, 'img-3')">
             <div class="timeline-marker">3</div>
             <div class="timeline-content">
               <h3>Verificar tu Cuenta</h3>
@@ -44,6 +45,14 @@
       <div class="split-right">
         <div class="phone-frame">
           <img id="img-3" src="img/inicio.jpeg" alt="Registro AliExpress" loading="lazy">
+          <div class="step-video" style="display:none; position:absolute; inset:0; border-radius:inherit; overflow:hidden;">
+            <iframe
+              src="https://www.youtube.com/embed/4U74ZpQWtc8"
+              style="width:100%; height:100%; border:0;"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+          </div>
           <div class="action-label"></div>
         </div>
       </div>

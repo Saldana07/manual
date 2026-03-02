@@ -23,8 +23,14 @@ async function goTo(target) {
   if (animating || target === current || target < 0 || target >= TOTAL) return;
   animating = true;
 
-  // Cargar el slide destino si aún no está en el DOM
-  await injectSlide(target);
+  // Cargar el slide destino — si falla la red, liberar el flag y salir
+  try {
+    await injectSlide(target);
+  } catch (e) {
+    animating = false;
+    console.warn(`Error cargando slide ${target}:`, e);
+    return;
+  }
 
   const currSlide = getSlide(current);
   const nextS = getSlide(target);
@@ -43,8 +49,11 @@ async function goTo(target) {
     // Activar primer item del timeline al entrar al slide
     const items = nextS.querySelectorAll('.timeline-item');
     if (items.length > 0) {
-      items.forEach(t => t.classList.remove('active-step'));
+      items.forEach(t => t.classList.remove('active-step', 'pulse-once'));
+      items[0].classList.add('pulse-once');
       items[0].click();
+      // Quitar pulse-once tras completar las 3 iteraciones (1.8s × 3)
+      setTimeout(() => items[0].classList.remove('pulse-once'), 5500);
     }
 
     // Inyectar hint de clic y link a Contenido (solo la primera vez por slide)
@@ -159,7 +168,7 @@ const HOTSPOTS = {
   /* PASO 2 · Registro */
   'img-3': [
     { dots: [{ x: 26, y: 26 }], label: 'Toca "Registrarse" para crear tu cuenta' },
-    { dots: [{ x: 82, y: 89 }], label: 'Ingresa tu correo electronico aqui' },
+    { dots: [{ x: 82, y: 89 }, { x: 30, y: 80 }, { x: 70, y: 80 }], label: 'Ingresa tu correo y contraseña, o usa Facebook, X, Google o Apple' },
     { dots: [{ x: 89, y: 95 }], label: 'Ingresa el codigo de verificacion recibido' },
     { dots: [{ x: 50, y: 56 }], label: 'Completa tu direccion de entrega aqui' },
   ],
@@ -185,9 +194,10 @@ const HOTSPOTS = {
 
   /* PASO 5 · Selección del producto */
   'img-6': [
+    { dots: [{ x: 45, y: 35 }], label: 'Toca el producto que mas te interese para ver sus detalles' },
     { dots: [{ x: 20, y: 45 }, { x: 50, y: 68 }], label: 'Revisa el precio y el tiempo estimado de envio' },
     { dots: [{ x: 40, y: 50 }], label: 'Toca la variante que deseas (color, talla...)' },
-    { dots: [{ x: 25, y: 96 }, { x: 75, y: 96 }], label: 'Toca "Agregar al carrito" o "Comprar ahora"' },
+    { dots: [{ x: 60, y: 96 }, { x: 95, y: 96 }], label: 'Toca "Agregar al carrito" o "Comprar ahora"' },
     { dots: [{ x: 50, y: 20 }], label: 'Verifica que tu direccion de entrega sea correcta' },
   ],
 
@@ -273,6 +283,12 @@ function updateModuleSlide(imgSrc, element, containerId) {
 
   const img = document.getElementById(containerId);
   if (!img) return;
+
+  // Si había un video de paso activo, ocultarlo y restaurar la imagen
+  const stepVideo = img.parentElement.querySelector('.step-video');
+  if (stepVideo) stepVideo.style.display = 'none';
+  img.style.display = '';
+
   img.style.opacity = 0;
   setTimeout(() => {
     img.src = imgSrc;
@@ -282,6 +298,25 @@ function updateModuleSlide(imgSrc, element, containerId) {
   const stepData = HOTSPOTS[containerId]?.[stepIndex];
   renderHotspots(img.parentElement, stepData);
 
+  updateNextStepIndicator(items, stepIndex);
+}
+
+/* ── VIDEO EMBEBIDO EN UN PASO DEL TIMELINE ── */
+function showStepVideo(element, containerId) {
+  const items = Array.from(element.parentElement.querySelectorAll('.timeline-item'));
+  const stepIndex = items.indexOf(element);
+  items.forEach(item => item.classList.remove('active-step'));
+  element.classList.add('active-step');
+
+  const img = document.getElementById(containerId);
+  if (!img) return;
+  img.style.display = 'none';
+  img.style.opacity = 1; // reset por si quedó en transición
+
+  const stepVideo = img.parentElement.querySelector('.step-video');
+  if (stepVideo) stepVideo.style.display = 'block';
+
+  renderHotspots(img.parentElement, null); // sin hotspots en paso de video
   updateNextStepIndicator(items, stepIndex);
 }
 
@@ -394,6 +429,7 @@ function addSlideExtras(slideEl) {
   // Link "← Contenido" en el tope (solo slides 3 en adelante)
   if (idx >= 3) {
     const link = document.createElement('button');
+    link.type = 'button';
     link.className = 'slide-contenido-link';
     link.innerHTML = '<i class="fa-solid fa-chevron-left"></i> Contenido';
     link.onclick = () => goTo(2);

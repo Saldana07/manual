@@ -14,6 +14,7 @@ async function injectSlide(index) {
 
   if (!_cache[index]) {
     const resp = await fetch(`slides/slide-${index}.html`);
+    if (!resp.ok) throw new Error(`Slide ${index} no encontrado (HTTP ${resp.status})`);
     _cache[index] = await resp.text();
   }
 
