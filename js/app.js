@@ -344,8 +344,10 @@ function switchSlideInstant(target) {
 async function startTour() {
   const originSlide = current;
 
-  // Pre-cargar slide 3 (Instalación) para la demo del teléfono
-  await injectSlide(3);
+  // Usar el slide actual si ya tiene phone-frame; si no, usar slide 3 (Instalación)
+  const currentHasPhone = !!document.querySelector(`#slide-${originSlide} .phone-frame`);
+  const demoSlide = currentHasPhone ? originSlide : 3;
+  await injectSlide(demoSlide);
 
   const tour = introJs();
 
@@ -356,8 +358,8 @@ async function startTour() {
       navButtons.style.opacity = '1';
       navButtons.style.pointerEvents = 'all';
     }
-    // Navegar al Paso 1 para mostrar el teléfono y la lista
-    if (step === 6) switchSlideInstant(3);
+    // Navegar al slide con teléfono solo si aún no estamos en él
+    if (step === 6 && current !== demoSlide) switchSlideInstant(demoSlide);
   });
 
   const restoreSlide = () => switchSlideInstant(originSlide);
@@ -404,12 +406,12 @@ async function startTour() {
         intro: 'Avanza al siguiente slide. También funcionan las teclas <b>→</b> y la <b>Barra espaciadora</b>.',
       },
       {
-        element: document.querySelector('#slide-3 .split-left'),
+        element: document.querySelector(`#slide-${demoSlide} .split-left`),
         title: '📋 Lista de pasos',
         intro: 'Cada fila del listado corresponde a una acción. <b>Tócala</b> para cambiar la imagen del teléfono y ver el punto exacto donde actuar.',
       },
       {
-        element: document.querySelector('#slide-3 .phone-frame'),
+        element: document.querySelector(`#slide-${demoSlide} .phone-frame`),
         title: '📱 Teléfono interactivo',
         intro: 'Muestra capturas reales de la app. Los <b>puntos pulsantes rojos ●</b> indican exactamente dónde tocar. La etiqueta debajo describe la acción.',
       },
