@@ -1,58 +1,87 @@
 <div class="slide-inner">
   <div class="content-wrapper">
     <div class="badge android" style="margin-bottom:14px;"><i class="fa-brands fa-android"></i> Android</div>
-    <h2>Paso 8 · Ayuda y Problemas Comunes</h2>
-    <p class="subtitle">Soluciona los inconvenientes más frecuentes y contacta soporte si lo necesitas.</p>
+    <h2>Paso 8 · Estados de tu Pedido</h2>
+    <p class="subtitle">Tu paquete atraviesa tres grandes fases desde que confirmas la compra hasta que llega a tus manos.</p>
 
-    <div class="split-view">
-      <div class="split-left">
-        <div class="timeline" id="timeline-9">
-          <div class="timeline-item active-step" onclick="updateModuleSlide('img/error.jpeg', this, 'img-9')">
-            <div class="timeline-marker" style="border-color:var(--warning);">
-              <i class="fa-solid fa-building-columns marker-icon"></i>
-            </div>
-            <div class="timeline-content" style="border-color:var(--warning);">
-              <h3>Pago Rechazado</h3>
-              <p><strong>Solución:</strong> Contacta tu banco para autorizar compras internacionales, o usa
-                <strong>PayPal</strong> como método alternativo.
-              </p>
-            </div>
-          </div>
-          <div class="timeline-item" onclick="updateModuleSlide('img/atrasado.jpeg', this, 'img-9')">
-            <div class="timeline-marker" style="border-color:var(--warning);">
-              <i class="fa-solid fa-clock marker-icon"></i>
-            </div>
-            <div class="timeline-content">
-              <h3>Paquete Atrasado</h3>
-              <p>Pide al vendedor que extienda el tiempo de protección. Si no responde en 3 días, abre una
-                <strong>disputa por "No Recibido"</strong>.
-              </p>
-            </div>
-          </div>
-          <div class="timeline-item" onclick="updateModuleSlide('img/eva.jpeg', this, 'img-9')">
-            <div class="timeline-marker"><i class="fa-solid fa-robot marker-icon"></i></div>
-            <div class="timeline-content">
-              <h3>Contactar Soporte (EVA)</h3>
-              <p>En el chat con el bot <strong>EVA</strong>, escribe frases como "hablar con humano" repetidamente hasta
-                que aparezca la opción de <strong>Agente en Vivo</strong>.</p>
-            </div>
-          </div>
-          <div class="timeline-item" onclick="updateModuleSlide('img/disputa.jpeg', this, 'img-9')">
-            <div class="timeline-marker"><i class="fa-solid fa-gavel marker-icon"></i></div>
-            <div class="timeline-content">
-              <h3>Abrir una Disputa</h3>
-              <p>Desde <strong>Mis pedidos → Abrir disputa</strong>, adjunta fotos y describe el problema. AliExpress
-                mediará y <strong>protegerá tu dinero</strong>.</p>
-            </div>
-          </div>
+    <div class="phases-grid">
+
+      <div class="phase-card">
+        <div class="phase-header">
+          <i class="fa-solid fa-warehouse"></i>
+          <h3>Fase 1 · Salida del almacén</h3>
         </div>
+        <ul class="state-list">
+          <li>
+            <strong>Registrado / Pre-registered</strong>
+            Paquete embalado y listo para que el transportista lo recoja.
+          </li>
+          <li>
+            <strong>Recibido por transportista / Admitido</strong>
+            La empresa de transporte ya tiene el paquete en sus manos.
+          </li>
+        </ul>
       </div>
-      <div class="split-right">
-        <div class="phone-frame">
-          <img id="img-9" src="img/error.jpeg" alt="Soporte AliExpress" loading="lazy">
-          <div class="action-label"></div>
+
+      <div class="phase-card">
+        <div class="phase-header">
+          <i class="fa-solid fa-plane-departure"></i>
+          <h3>Fase 2 · Salida de China</h3>
         </div>
+        <ul class="state-list">
+          <li>
+            <strong>En centro de clasificación</strong>
+            El paquete se organiza para su distribución internacional.
+          </li>
+          <li>
+            <strong>Exportación exitosa</strong>
+            Pasó aduana de origen sin inconvenientes (90&nbsp;% de los casos).
+          </li>
+          <li>
+            <strong>Retenido por aduanas</strong>
+            Revisión burocrática temporal; suele resolverse solo en pocos días.
+          </li>
+          <li>
+            <strong>Salida de aerolínea / Hand over</strong>
+            La mercancía partió en vuelo hacia el país de destino.
+          </li>
+        </ul>
       </div>
+
+      <div class="phase-card">
+        <div class="phase-header">
+          <i class="fa-solid fa-map-location-dot"></i>
+          <h3>Fase 3 · En ruta al destino</h3>
+        </div>
+        <ul class="state-list">
+          <li>
+            <strong>Llegada al país de destino</strong>
+            Pendiente de despacho de aduanas de importación.
+          </li>
+          <li>
+            <strong>Despacho de importación exitoso</strong>
+            Dentro del país; en camino al centro de distribución local.
+          </li>
+          <li>
+            <strong>En tránsito</strong>
+            Dirigiéndose a la oficina de entrega de tu ciudad.
+          </li>
+          <li>
+            <strong>En proceso de entrega / Delivering</strong>
+            El mensajero está llevando el paquete a tu dirección.
+          </li>
+          <li>
+            <strong>Entregado</strong>
+            ¡Llegó! Confírmalo en la app para liberar el pago y cerrar la protección.
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="tip-box" style="margin-top:20px;">
+      <i class="fa-solid fa-triangle-exclamation"></i>
+      <span>Si ves <em>"Shatian Town"</em>, <em>"Fenggang Town"</em> o <em>"Mayong Town"</em> en el rastreo, es normal — son centros de distribución en China desde donde sale tu paquete.</span>
     </div>
   </div>
 </div>

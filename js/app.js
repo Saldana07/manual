@@ -3,7 +3,7 @@
    ─────────────────────────────────────────── */
 
 /* ── CONFIGURACIÓN GENERAL ── */
-const TOTAL = 12;
+const TOTAL = 14;
 let current = 0;
 let animating = false;
 
@@ -47,6 +47,9 @@ async function goTo(target) {
       items[0].click();
     }
 
+    // Inyectar hint de clic y link a Contenido (solo la primera vez por slide)
+    addSlideExtras(nextS);
+
     animating = false;
 
     // Pre-cargar slides adyacentes en segundo plano
@@ -72,7 +75,7 @@ function updateUI() {
   } else if (current === TOTAL - 1) {
     navCounter.textContent = 'GLOSARIO';
   } else {
-    navCounter.textContent = `PASO ${current - 2} DE 8`;
+    navCounter.textContent = `PASO ${current - 2} DE 10`;
   }
 
   // Ocultar botones Anterior/Siguiente en Portada, Introducción y Contenido
@@ -207,13 +210,16 @@ const HOTSPOTS = {
     { dots: [{ x: 50, y: 30 }], label: 'Toca aqui para confirmar que recibiste el paquete' },
   ],
 
-  /* PASO 8 · Problemas y soporte */
+  /* PASO 9 · Asistencia en línea con EVA */
   'img-9': [
-    { dots: [{ x: 35, y: 11 }], label: 'Mensaje de pago rechazado por el banco' },
-    { dots: [{ x: 50, y: 43 }], label: 'Desde aqui puedes abrir una disputa por retraso' },
-    { dots: [{ x: 60, y: 94 }], label: 'Escribe aqui para chatear con el asistente EVA' },
-    { dots: [{ x: 68, y: 52 }], label: 'Toca "Abrir disputa" para proteger tu compra' },
+    { dots: [{ x: 95, y: 93 }], label: 'Toca "Mi Cuenta" en la barra inferior de la app' },
+    { dots: [{ x: 50, y: 25 }], label: 'Selecciona: Pendiente de pago, Pendiente de envío o Enviado' },
+    { dots: [{ x: 86, y: 4 }], label: 'Toca el ícono de muñeco con audífonos para abrir soporte' },
+    { dots: [{ x: 65, y: 5 }], label: 'Se abre el Centro de Ayuda — aquí verás las opciones de contacto' },
+    { dots: [{ x: 65, y: 90 }], label: 'Presiona el botón con audífonos que dice "En Línea"' },
+    { dots: [{ x: 70, y: 95 }], label: 'Escribe tu consulta — un asistente real te responderá' },
   ],
+
 };
 
 /* ── RENDER DE HOTSPOTS ── */
@@ -237,10 +243,31 @@ function renderHotspots(frameEl, stepData) {
   });
 }
 
+/* ── INDICADOR DE SIGUIENTE PASO (manito animada) ── */
+function updateNextStepIndicator(items, activeIdx) {
+  // Quitar indicador previo de todos los pasos
+  items.forEach(item => {
+    const ind = item.querySelector('.next-step-indicator');
+    if (ind) ind.remove();
+  });
+
+  // Inyectar en el siguiente paso (si existe)
+  const next = items[activeIdx + 1];
+  if (next) {
+    const content = next.querySelector('.timeline-content');
+    if (content) {
+      const ind = document.createElement('div');
+      ind.className = 'next-step-indicator';
+      ind.innerHTML = '<i class="fa-solid fa-hand-pointer"></i><span>Toca aquí para ver este paso</span>';
+      content.appendChild(ind);
+    }
+  }
+}
+
 /* ── CAMBIO DE IMAGEN + HOTSPOTS EN TIMELINES ── */
 function updateModuleSlide(imgSrc, element, containerId) {
-  const items = element.parentElement.querySelectorAll('.timeline-item');
-  const stepIndex = Array.from(items).indexOf(element);
+  const items = Array.from(element.parentElement.querySelectorAll('.timeline-item'));
+  const stepIndex = items.indexOf(element);
   items.forEach(item => item.classList.remove('active-step'));
   element.classList.add('active-step');
 
@@ -254,6 +281,8 @@ function updateModuleSlide(imgSrc, element, containerId) {
 
   const stepData = HOTSPOTS[containerId]?.[stepIndex];
   renderHotspots(img.parentElement, stepData);
+
+  updateNextStepIndicator(items, stepIndex);
 }
 
 /* ── TOUR INTRODUCTORIO ── */
@@ -350,6 +379,36 @@ async function startTour() {
       },
     ],
   }).start();
+}
+
+/* ── EXTRAS POR SLIDE (hint interactivo + link Contenido) ── */
+function addSlideExtras(slideEl) {
+  if (slideEl.dataset.extras === '1') return;
+  slideEl.dataset.extras = '1';
+
+  const wrapper = slideEl.querySelector('.content-wrapper');
+  if (!wrapper) return;
+
+  const idx = parseInt(slideEl.dataset.index);
+
+  // Link "← Contenido" en el tope (solo slides 3 en adelante)
+  if (idx >= 3) {
+    const link = document.createElement('button');
+    link.className = 'slide-contenido-link';
+    link.innerHTML = '<i class="fa-solid fa-chevron-left"></i> Contenido';
+    link.onclick = () => goTo(2);
+    wrapper.insertBefore(link, wrapper.firstChild);
+  }
+
+  // Hint de interacción encima del timeline (se elimina al primer clic del usuario)
+  const timeline = slideEl.querySelector('.timeline');
+  if (timeline) {
+    const hint = document.createElement('p');
+    hint.className = 'timeline-hint';
+    hint.innerHTML = '<i class="fa-regular fa-hand-pointer"></i> Toca cada paso para ver en pantalla';
+    timeline.parentElement.insertBefore(hint, timeline);
+    timeline.addEventListener('click', () => hint.remove(), { once: true });
+  }
 }
 
 /* ── INICIALIZAR ── */
