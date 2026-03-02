@@ -3,7 +3,7 @@
    ─────────────────────────────────────────── */
 
 /* ── CONFIGURACIÓN GENERAL ── */
-const TOTAL = 14;
+const TOTAL = 15;
 let current = 0;
 let animating = false;
 
@@ -170,10 +170,18 @@ const HOTSPOTS = {
     { dots: [{ x: 26, y: 26 }], label: 'Toca "Registrarse" para crear tu cuenta' },
     { dots: [{ x: 50, y: 70 }, { x: 70, y: 33 }, { x: 70, y: 41 }], label: 'Ingresa tu correo y contraseña, o usa Facebook, X, Google o Apple' },
     { dots: [{ x: 89, y: 95 }], label: 'Ingresa el codigo de verificacion recibido' },
-    { dots: [{ x: 50, y: 56 }], label: 'Completa tu direccion de entrega aqui' },
   ],
 
-  /* PASO 3 · Interfaz principal */
+  /* PASO 3 · Dirección de Entrega */
+  'img-dir': [
+    { dots: [{ x: 93, y: 94 }], label: 'Toca Mi Cuenta en la barra inferior' },
+    { dots: [{ x: 86, y: 5 }], label: 'Toca el ícono de configuración (tuerca)' },
+    { dots: [{ x: 50, y: 17 }], label: 'Toca Dirección de entrega en el menú de Configuración' },
+    { dots: [{ x: 80, y: 90 }], label: 'Toca Añadir nueva dirección' },
+    { dots: [{ x: 70, y: 95 }], label: 'Completa todos los campos del formulario y toca Guardar' },
+  ],
+
+  /* PASO 4 · Interfaz principal */
   'img-4': [
     { dots: [{ x: 50, y: 12 }], label: 'Esta es la barra de busqueda principal' },
     { dots: [{ x: 50, y: 72 }], label: 'Aqui aparecen las ofertas y cupones activos' },
@@ -203,11 +211,9 @@ const HOTSPOTS = {
 
   /* PASO 6 · Pago */
   'img-7': [
-    { dots: [{ x: 45, y: 33 }], label: 'Toca aqui para seleccionar el metodo de pago' },
-    {
-      dots: [{ x: 50, y: 34 }, { x: 50, y: 52 }, { x: 50, y: 61 }],
-      label: 'Ingresa numero de tarjeta, fecha y CVV'
-    },
+    { dots: [{ x: 50, y: 47 }], label: 'Toca aqui para ver las opciones de metodo de pago disponibles' },
+    { dots: [{ x: 70, y: 35 },{ x: 70, y: 42 }], label: 'Toca aqui para seleccionar el metodo de pago' },
+    {dots: [{ x: 60, y: 38 }, { x: 60, y: 52 }, { x: 60, y: 57 }],label: 'Ingresa numero de tarjeta, fecha y CVV'},
     { dots: [{ x: 50, y: 55 }], label: 'Verifica el total a pagar antes de confirmar' },
     { dots: [{ x: 75, y: 95 }], label: 'Toca "Pagar ahora" para confirmar tu compra' },
   ],

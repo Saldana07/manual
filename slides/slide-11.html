@@ -1,66 +1,87 @@
 <div class="slide-inner">
   <div class="content-wrapper">
     <div class="badge android" style="margin-bottom:14px;"><i class="fa-brands fa-android"></i> Android</div>
-    <h2>Paso 9 · Asistencia en Línea con EVA</h2>
-    <p class="subtitle">Contacta al soporte de AliExpress y habla con un agente real siguiendo estos pasos.</p>
+    <h2>Paso 9 · Estados de tu Pedido</h2>
+    <p class="subtitle">Tu paquete atraviesa tres grandes fases desde que confirmas la compra hasta que llega a tus manos.</p>
 
-    <div class="split-view">
-      <div class="split-left">
-        <div class="timeline" id="timeline-eva">
-          <div class="timeline-item active-step" onclick="updateModuleSlide('img/inicio.jpeg', this, 'img-9')">
-            <div class="timeline-marker">1</div>
-            <div class="timeline-content">
-              <h3>Presiona "Mi Cuenta"</h3>
-              <p>Desde la pantalla principal, toca el ícono de <strong>Mi Cuenta</strong> en la barra inferior para acceder a tu perfil y pedidos.</p>
-            </div>
-          </div>
-          <div class="timeline-item" onclick="updateModuleSlide('img/mispedidos.jpeg', this, 'img-9')">
-            <div class="timeline-marker">2</div>
-            <div class="timeline-content">
-              <h3>Selecciona una opción de pedido</h3>
-              <p>Elige cualquiera de las categorías: <strong>Pendiente de pago</strong>, <strong>Pendiente de envío</strong> o <strong>Enviado</strong> para ver tus pedidos activos.</p>
-            </div>
-          </div>
-          <div class="timeline-item" onclick="updateModuleSlide('img/soporte-tecnico.jpg', this, 'img-9')">
-            <div class="timeline-marker">3</div>
-            <div class="timeline-content">
-              <h3>Selecciona el ícono de soporte</h3>
-              <p>Toca el ícono de <strong>muñeco con audífonos</strong> para acceder al Centro de Ayuda de AliExpress.</p>
-            </div>
-          </div>
-          <div class="timeline-item" onclick="updateModuleSlide('img/bienvenida-centroayuda.jpg', this, 'img-9')">
-            <div class="timeline-marker">4</div>
-            <div class="timeline-content">
-              <h3>Ventana de bienvenida</h3>
-              <p>Se abrirá el <strong>Centro de Ayuda</strong> con un mensaje de bienvenida. Aquí verás las opciones de contacto disponibles.</p>
-            </div>
-          </div>
-          <div class="timeline-item" onclick="updateModuleSlide('img/bienvenida-centroayuda.jpg', this, 'img-9')">
-            <div class="timeline-marker">5</div>
-            <div class="timeline-content">
-              <h3>Presiona "En Línea"</h3>
-              <p>Toca el botón con el ícono de <strong>audífonos</strong> que dice <strong>"En Línea"</strong> para iniciar una sesión con un agente de soporte en tiempo real.</p>
-            </div>
-          </div>
-          <div class="timeline-item" onclick="updateModuleSlide('img/eva.jpeg', this, 'img-9')">
-            <div class="timeline-marker">6</div>
-            <div class="timeline-content">
-              <h3>Chat con asistente</h3>
-              <p>Se abre el chat. Escribe tu consulta claramente — un <strong>agente real</strong> te responderá. Si ves el bot EVA, escribe <em>"hablar con humano"</em> varias veces.</p>
-            </div>
-          </div>
+    <div class="phases-grid">
+
+      <div class="phase-card">
+        <div class="phase-header">
+          <i class="fa-solid fa-warehouse"></i>
+          <h3>Fase 1 · Salida del almacén</h3>
         </div>
-        <div class="tip-box">
-          <i class="fa-solid fa-clock"></i>
-          <span>El soporte en línea está disponible en horarios específicos. Si el botón "En Línea" aparece desactivado, prueba en otro horario o usa el chat de texto con EVA.</span>
-        </div>
+        <ul class="state-list">
+          <li>
+            <strong>Registrado / Pre-registered</strong>
+            Paquete embalado y listo para que el transportista lo recoja.
+          </li>
+          <li>
+            <strong>Recibido por transportista / Admitido</strong>
+            La empresa de transporte ya tiene el paquete en sus manos.
+          </li>
+        </ul>
       </div>
-      <div class="split-right">
-        <div class="phone-frame">
-          <img id="img-9" src="img/inicio.jpeg" alt="Asistencia EVA AliExpress" loading="lazy">
-          <div class="action-label"></div>
+
+      <div class="phase-card">
+        <div class="phase-header">
+          <i class="fa-solid fa-plane-departure"></i>
+          <h3>Fase 2 · Salida de China</h3>
         </div>
+        <ul class="state-list">
+          <li>
+            <strong>En centro de clasificación</strong>
+            El paquete se organiza para su distribución internacional.
+          </li>
+          <li>
+            <strong>Exportación exitosa</strong>
+            Pasó aduana de origen sin inconvenientes (90&nbsp;% de los casos).
+          </li>
+          <li>
+            <strong>Retenido por aduanas</strong>
+            Revisión burocrática temporal; suele resolverse solo en pocos días.
+          </li>
+          <li>
+            <strong>Salida de aerolínea / Hand over</strong>
+            La mercancía partió en vuelo hacia el país de destino.
+          </li>
+        </ul>
       </div>
+
+      <div class="phase-card">
+        <div class="phase-header">
+          <i class="fa-solid fa-map-location-dot"></i>
+          <h3>Fase 3 · En ruta al destino</h3>
+        </div>
+        <ul class="state-list">
+          <li>
+            <strong>Llegada al país de destino</strong>
+            Pendiente de despacho de aduanas de importación.
+          </li>
+          <li>
+            <strong>Despacho de importación exitoso</strong>
+            Dentro del país; en camino al centro de distribución local.
+          </li>
+          <li>
+            <strong>En tránsito</strong>
+            Dirigiéndose a la oficina de entrega de tu ciudad.
+          </li>
+          <li>
+            <strong>En proceso de entrega / Delivering</strong>
+            El mensajero está llevando el paquete a tu dirección.
+          </li>
+          <li>
+            <strong>Entregado</strong>
+            ¡Llegó! Confírmalo en la app para liberar el pago y cerrar la protección.
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="tip-box" style="margin-top:20px;">
+      <i class="fa-solid fa-triangle-exclamation"></i>
+      <span>Si ves <em>"Shatian Town"</em>, <em>"Fenggang Town"</em> o <em>"Mayong Town"</em> en el rastreo, es normal — son centros de distribución en China desde donde sale tu paquete.</span>
     </div>
   </div>
 </div>
