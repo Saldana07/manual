@@ -168,7 +168,7 @@ const HOTSPOTS = {
   /* PASO 2 · Registro */
   'img-3': [
     { dots: [{ x: 26, y: 26 }], label: 'Toca "Registrarse" para crear tu cuenta' },
-    { dots: [{ x: 82, y: 89 }, { x: 30, y: 80 }, { x: 70, y: 80 }], label: 'Ingresa tu correo y contraseña, o usa Facebook, X, Google o Apple' },
+    { dots: [{ x: 50, y: 70 }, { x: 70, y: 33 }, { x: 70, y: 41 }], label: 'Ingresa tu correo y contraseña, o usa Facebook, X, Google o Apple' },
     { dots: [{ x: 89, y: 95 }], label: 'Ingresa el codigo de verificacion recibido' },
     { dots: [{ x: 50, y: 56 }], label: 'Completa tu direccion de entrega aqui' },
   ],
